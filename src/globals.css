@@ -1,0 +1,16 @@
+:root{
+    --blue-light: #A1D1FF;
+    --orange: #FC8763;
+    --purple: #763A7A;
+    --green-light: #ACFFC3;
+    --red-light : #FF8080;
+}
+
+*{
+    margin: 0;
+    paddin:0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: 'Lato', sans-serif;
+}
+
