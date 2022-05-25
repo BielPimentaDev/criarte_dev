@@ -18,62 +18,37 @@ const Calendar = styled.div`
 `
 
 
-export function CurrentCalendar({openModal}){
+export function CurrentCalendar({openModal, months}){
     return(
         
             <Calendar>
                 
             <div className="flex  justify-center mt-10 flex-wrap  justify-items-start gap-5 sm:gap-10">
                 
-                <ul> <span>Segunda</span> 
-                    <li><CalendarDay openModal={openModal} /></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} /></li>
-                    <li><CalendarDay openModal={openModal} /></li>                   
-                </ul>
-                <ul> <span>Terça</span> 
-                <li><CalendarDay openModal={openModal} /></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>  
-                </ul>
-                <ul> <span>Quarta</span> 
-                <li><CalendarDay openModal={openModal} /></li>
-                    <li><CalendarDay openModal={openModal} /></li>
-                    <li><CalendarDay openModal={openModal} /></li>
-                    <li><CalendarDay openModal={openModal} /></li>
-                    <li><CalendarDay openModal={openModal} /></li>  
-                </ul>
-                <ul> <span>Quinta</span> 
-                <li><CalendarDay openModal={openModal} /></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} /></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} /></li>  
-                </ul>
-                <ul> <span>Sexta</span> 
-                <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} /></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} /></li>  
-                </ul>
-                <ul> <span>Sábado</span> 
-                <li><CalendarDay openModal={openModal} /></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} /></li>  
-                </ul>
-                <ul> <span>Domingo</span> 
-                <li><CalendarDay openModal={openModal}isFull={'true'} /></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>
-                    <li><CalendarDay openModal={openModal} isFull={'true'}/></li>  
-                </ul>
+                {
+                    months.map(week =>{
+                        return(
+                           <div className= ' flex flex-col'>
+                               <span>{week[0]}</span>
+
+                               <div className=' flex flex-col gap-5'>
+                                   {
+                                       week[1].map(day=>{
+                                           if( Object.keys(day) == 0){
+                                               return <p> <br/> </p>
+                                           }
+                                           else{
+                                               return  <CalendarDay dayOfMonth =  {Object.keys(day)}  />
+                                           }
+                                       })
+                                   }
+                               </div>
+                           
+
+                           </div>
+                        )
+                    })
+                }
                
             </div>
 

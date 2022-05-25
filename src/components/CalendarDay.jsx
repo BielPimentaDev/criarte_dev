@@ -13,12 +13,12 @@ const DayButton = styled.button`
             }
 `
 
-function CalendarDay({isFull, openModal}) {
+function CalendarDay({dayOfMonth, isFull, openModal}) {
     
     return ( 
         <Link to='/clients-table'>
-            <DayButton onClick={()=> openModal(true)} isFull={isFull}>
-            01
+            <DayButton onClick={()=> openModal(true)} isFull={isFull} >
+            {dayOfMonth}
             </DayButton>        
         </Link>
         
