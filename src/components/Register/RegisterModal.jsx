@@ -1,10 +1,49 @@
 import { RegisterForm } from './RegisterModalStyle';
 import {XCircle, Users, CaretLeft} from 'phosphor-react'
 import {Link} from 'react-router-dom'
+import { useForm } from "react-hook-form";
 import{Header} from'../Header'
+import axios from 'axios'
+import { useContext } from 'react';
+import AppContext from '../../context/AppContext'
 
 function RegisterModal() {
+    
+    const { register, handleSubmit, reset, formState: { errors } } = useForm(); 
+    const {dayOfTable, setDayOfTable} = useContext(AppContext)
+    const {monthWeekDay, setMonthWeekDay} = useContext(AppContext)
+
+    const url = 'https://thayxis.herokuapp.com/api/v1/products'
+    const onSubmit = data => {
+        const newDate = (monthWeekDay +'-'+dayOfTable[0])
+        axios.post(url,
+            {
+                "type": data.productName,
+                "printed_name": data.printedName,
+                "theme": data.themeName,
+                "price": data.priceName,
+                "sex": data.sexName,
+                "payment": data.payName,
+                "day": newDate,
+                "client": {
+                  "name": data.clientName,
+                  "address": data.addressName,
+                  "state": data.stateName
+                }
+              }
+            )
+                .then(res => console.log(res))
+                .catch(err => {
+                    if(err.response.data['detail'] == "The day's capacity is full"){
+                        alert('Capacidade máxima atingida!')
+                        console.log(err)
+                    }
+                })
+            reset()
+    }
+    
     return ( 
+
         <>
         <Header/>
         
@@ -36,32 +75,32 @@ function RegisterModal() {
             </Link> 
                 </section>
 
-                <RegisterForm>
+                <RegisterForm   onSubmit={handleSubmit(onSubmit)}>
 
                     <section>
                         <div className='inputContainer'>                            
-                            <input type="text" placeholder=' ' className='inputForm'></input>
+                            <input type="text" placeholder=' ' className='inputForm' name='clientName' {...register('clientName')}></input>
                             <label className='inputLabel'> Cliente:</label>
                             
                         </div>
                     </section>
                     <section>
                         <div className='inputContainer'>                            
-                            <input type="text" placeholder=' ' className='inputForm'></input>
+                            <input type="text" placeholder=' ' className='inputForm' name='productName' {...register('productName')}></input>
                             <label className='inputLabel'> Produto:</label>
                             
                         </div>
                     </section>
                     <section>
                         <div className='inputContainer'>                            
-                            <input type="text" placeholder=' ' className='inputForm'></input>
+                            <input type="text" placeholder=' ' className='inputForm' name='printedName' {...register('printedName')}></input>
                             <label className='inputLabel'> Nome impresso:</label>
                             
                         </div>
                     </section>
                     <section>
                         <div className='inputContainer'>                            
-                            <input type="text" placeholder=' ' className='inputForm'></input>
+                            <input type="text" placeholder=' ' className='inputForm' name = 'themeName' {...register('themeName')}></input>
                             <label className='inputLabel'> Tema:</label>
                             
                         </div>
@@ -69,12 +108,12 @@ function RegisterModal() {
 
                     <section className='rowSection'>
                         <div className='inputContainer'>                            
-                            <input type="text" placeholder=' ' className='inputForm'></input>
+                            <input type="text" placeholder=' ' className='inputForm' name='sexName' {...register('sexName')}></input>
                             <label className='inputLabel'> Sexo::</label>
                             
                         </div>
                         <div className='inputContainer'>                            
-                            <input type="text" placeholder=' ' className='inputForm'></input>
+                            <input type="text" placeholder=' ' className='inputForm' name = 'stateName' {...register('stateName')}></input>
                             <label className='inputLabel'> Estado:</label>
                             
                         </div>
@@ -82,19 +121,19 @@ function RegisterModal() {
                     </section>
                     <section>
                         <div className='inputContainer'>                            
-                            <input type="text" placeholder=' ' className='inputForm'></input>
+                            <input type="text" placeholder=' ' className='inputForm' name = 'addressName' {...register('addressName')}></input>
                             <label className='inputLabel'> Endereço:</label>
                             
                         </div>
                     </section>
                     <section className='rowSection'>
                         <div className='inputContainer'>                            
-                            <input type="text" placeholder=' ' className='inputForm'></input>
+                            <input type="text" placeholder=' ' className='inputForm' name='priceName' {...register('priceName')}></input>
                             <label className='inputLabel'> Preço:</label>
                             
                         </div>
                         <div className='inputContainer'>                            
-                            <input type="text" placeholder=' ' className='inputForm'></input>
+                            <input type="text" placeholder=' ' className='inputForm' name='payName' {...register('payName')}></input>
                             <label className='inputLabel'> Pagamento:</label>
                             
                         </div>
@@ -103,8 +142,8 @@ function RegisterModal() {
 
                   
                     
+                   <button type='submit' className='mt-5 bg-brandOrange-500 text-white px-10  w-full text-2xl sm:rounded-lg  sm:mt-[-60px] sm:w-[full] h-[80px] '> CADASTRAR</button>
                 </RegisterForm>
-                    <Link to='/client-register'><button  className='mt-5 bg-brandOrange-500 text-white px-10  w-full text-2xl sm:rounded-lg  sm:mt-[-60px] sm:w-[full] h-[80px] '> CADASTRAR</button></Link>
                 
             </container>
 

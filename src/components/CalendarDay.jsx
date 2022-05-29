@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
-
+import AppContext from '../context/AppContext'
+import { useContext } from 'react'
 
 
 
@@ -16,14 +17,29 @@ const DayButton = styled.button`
             }
 `
 
-function CalendarDay({dayOfMonth, isFull, openModal}) {
+function CalendarDay({dayOfMonth, isFull, openModal, month}) {
     
-    return ( 
+    const {dayOfTable, setDayOfTable} = useContext(AppContext)
+    const {monthWeekDay, setMonthWeekDay} = useContext(AppContext)
+    
+    
+    function dayButtonClick(month){
+            
+            setDayOfTable(dayOfMonth)
+            setMonthWeekDay(month)
+            
+    }
+
+    return (
+        
         <Link to='/clients-table'>
-            <DayButton onClick={()=> openModal(true)} isFull={isFull} >
+            <DayButton onClick={() => dayButtonClick(month)} isFull={isFull} >
+            
             {dayOfMonth}
             </DayButton>        
         </Link>
+        
+        
         
      );
 }

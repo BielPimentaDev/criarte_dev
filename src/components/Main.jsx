@@ -2,8 +2,9 @@ import { Calendar, CaretLeft, CaretRight } from "phosphor-react";
 import { CurrentCalendar } from "./CurrentCalendar";
 import { Header } from "./Header";
 import axios from 'axios'
-import { useEffect, useState } from 'react';
-import {monthsTranslate} from './DataConvert'
+import { useEffect, useState, useContext } from 'react';
+import {monthsTranslate, translateDictionary} from './DataConvert'
+import AppContext from '../context/AppContext'
 
 
 export function Main(){
@@ -11,7 +12,7 @@ export function Main(){
     const [months, setMonths] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [monthsShow, setMonthsShow] = useState(1)
-   
+    const {data, setData} =  useContext(AppContext)
 
     
     const url = 'https://thayxis.herokuapp.com/api/v1/products'
@@ -24,7 +25,7 @@ export function Main(){
     async function fetchData(){
         const results = await callApi()
         const jsonData =Object.entries(results.data)
-        
+        setData(results.data)
         setMonths(jsonData)
         setIsLoading(false)
     }
@@ -68,8 +69,9 @@ export function Main(){
         </button>
         
     </section>
+    
 
-        <CurrentCalendar months = { Object.entries(months[monthsShow][1])}/>
+        <CurrentCalendar months = { Object.entries(months[monthsShow][1])} month = {months[monthsShow][0]}/>
     </>
     }
         
