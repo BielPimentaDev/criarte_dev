@@ -11,14 +11,53 @@ import axios from 'axios'
 
 function ClientsModal({registerModal, closeModal}) {
 
-    
+    const [clients, setClients] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     const {dayOfTable, setDayOfTable} = useContext(AppContext)
     const {monthWeekDay, setMonthWeekDay} = useContext(AppContext)
-    const {data, setData} = useContext(AppContext)
     
-   
+    var newDay = dayOfTable
+    if(dayOfTable <10){
+        var newDay = '0' + dayOfTable
+    }
+
+    var newMonthYear = monthWeekDay
+    if (monthWeekDay.slice(6,7) == ''){
+        
+        var newMonthYear = monthWeekDay.slice(0,5) + '0' + monthWeekDay.slice(5,6)
+    }
+
+    const dayUrl =newMonthYear + '-' + newDay
+    
     
 
+    
+    
+    
+    
+    const url = `https://thayxis.herokuapp.com/api/v1/days/${dayUrl}`
+
+    
+    
+    
+    function fetchData(){
+        axios.get(url)
+        .then(res=>setClients(res.data))
+        .catch(err=> console.log(err))
+        .finally(setIsLoading(false))
+        
+    }
+    
+    useEffect(
+        () => {
+            console.log(url)
+            fetchData()
+            
+            
+        },
+            
+        []
+    )
 
 
   return (
@@ -26,7 +65,7 @@ function ClientsModal({registerModal, closeModal}) {
       <Header/>
     <div className=" bg-fixed flex  justify-center bg-gray-400 bg-opacity-70 w-full h-[200%] absolute top-0 sm:h-[100%]">
         
-        <container className=" fixed bg-zinc-50 shadow-2xl mt-10 shadow-gray-500 w-[100%] h-[100vh] top-[-40px] sm:w-[90%] sm:h-[80%] sm:top-[0] sm:rounded-2xl">
+        <div className=" fixed bg-zinc-50 shadow-2xl mt-10 shadow-gray-500 w-[100%] h-[100vh] top-[-40px] sm:w-[90%] sm:h-[80%] sm:top-[0] sm:rounded-2xl">
         
         <div className=' relative rounded-tl-lg flex-1 text-center'>
            
@@ -41,8 +80,7 @@ function ClientsModal({registerModal, closeModal}) {
             
             <section className='max-h-[70%] overflow-y-scroll '>
 
-                <ClientsTable>
-                    
+                <ClientsTable>                    
                     <thead >
                         <tr >
                             <th>Cliente</th>
@@ -50,95 +88,82 @@ function ClientsModal({registerModal, closeModal}) {
                             <th>Preço</th>
                             <th>Endereço</th>
                         </tr>
-                    </thead>
-                    <tbody >                       
+                    </thead>                                        
                      
-                        <tr valign="top"  className=''>
-
-                            <td >
-                                <h2>Gabriel</h2>
-                                <br/>
-                                <div >
-                                    <b>Nome impresso</b>                                    
-                                    <span >Guilherme</span>
-                                </div>
-                                <div >
-                                    <b>Sexo</b>                                    
-                                    <span >Masculino</span>
-                                </div>
-                                <div >
-                                    <b>Tema</b>                                    
-                                    <span >Estrelas</span>
-                                </div>
-                            </td>
-
-                            <td >
-                                Caderno
-                                <br/><br/>
-                                <div >
-                                    <label>Miolo <button></button></label>
-                                    <label>Miolo <button></button></label>
-                                    
-                                </div>
-                               
-                                
-                            </td> 
-
-                            <td >
-                            R$ 50,00
-                            <br/><br/>
-                                <div >
-                                    <b>Pagamento</b>                                    
-                                    <span >PIX</span>
-                                </div>
-
-                            </td>
-
-                            <td >
-                                Niterói
-                                <br/><br/>
-                                <div >
-                                    <b>Estado</b>                                   
-                                    <span >RJ</span>
-                                </div>    
-                                <div >
-                                    <b>Rua</b>                                   
-                                    <span ><p>Rua justina bulhões, n2 bloco3 ap507</p></span>
-                                </div>                               
+                        <tbody>
                             
-                            </td>                        
+                        {clients.map(client=>{
+                            
+                            return(
+                                <tr valign="top"  className=''>
+
+                                    <td >
+                                        {client.client_name}
+                                        <br/>
+                                        <div >
+                                            <b>Nome impresso</b>                                    
+                                            <span >{client.printed_name}</span>
+                                        </div>
+                                        <div >
+                                            <b>Sexo</b>                                    
+                                            <span >{client.sex}</span>
+                                        </div>
+                                        <div >
+                                            <b>Tema</b>                                    
+                                            <span >{client.theme}</span>
+                                        </div>
+                                    </td>
+        
+                                    <td >
+                                        {client.type}
+                                        <br/><br/>
+                                        <div >
+                                            <label>Miolo <button></button></label>
+                                            <label>Miolo <button></button></label>
                                             
-                        </tr>
+                                        </div>
+                                       
+                                        
+                                    </td> 
+        
+                                    <td >
+                                    {client.price}
+                                    <br/><br/>
+                                        <div >
+                                            <b>Pagamento</b>                                    
+                                            <span >{client.payment}</span>
+                                        </div>
+        
+                                    </td>
+        
+                                    <td >
+                                        
+                                            {client.client_state}
+                                        <br/><br/>
+                                        <div >
+                                            <b>Estado</b>                                   
+                                        </div>    
+                                        <div >
+                                            <b>Rua</b>                                   
+                                            <span ><p>{client.client_address}</p></span>
+                                        </div>                               
+                                    
+                                    </td>                        
+                                                    
+                                </tr>
+                            )
+                        })}    
+                        </tbody>                 
                         
-                        {
 
-                           Object.values(data[monthWeekDay]).forEach(day=>{
-                               day.forEach(newDay=>{
-                                   if (dayOfTable[0] == Object.keys(newDay)[0]){
-                                       Object.values(newDay).forEach(client=>{
-                                           client.forEach(clientRow=>{
-                                               
-                                              return(
-                                                  
-                                                  <tr>
-                                                      <td valign="top" key={clientRow.id}  className=''>Gabriel</td>
-                                                  </tr>
-                                                  
-                                              )
-                                           })
-                                       })
-                                   }
-                               })
-                           })
-
-                        }
-                    </tbody>
+                        
+                    
 
                 </ClientsTable>
                 <Link to='/client-register'><button  className='absolute bottom-5 right-[50%] translate-x-[50%] bg-brandOrange-500 text-white  w-[80%] h-[50px] rounded-lg max-w-[800px]'> CADASTRAR</button></Link>
             </section>
             
-        </container>
+        </div>
         
     </div>
     </>

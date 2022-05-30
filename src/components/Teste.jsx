@@ -1,67 +1,32 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react';
 import CalendarDay from './CalendarDay'
+import { useContext } from 'react'
+import AppContext from '../context/AppContext'
 
 export function Teste() {
-    const [months, setMonths] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
-    const [monthsShow, setMonthsShow] = useState(0)
-   
 
+    const {dayOfTable, setDayOfTable} = useContext(AppContext)
+    const {monthWeekDay, setMonthWeekDay} = useContext(AppContext)
     
-    const url = 'https://thayxis.herokuapp.com/api/v1/products'
-    
-    const callApi= async () => {
-        const results = await axios.get(url)
-        return results
-    }
-
-    async function fetchData(){
-        const results = await callApi()
-        const jsonData =Object.entries(results.data)
-        
-        setMonths(jsonData)
-        setIsLoading(false)
+    function dataReload(day, monthYear){
+        if (day < 10){
+            const newDay = '0'+ day
+            return newDay
+        }
+        if(monthYear.length == 4){
+            const newString = monthYear.slice(0,3) + '0' + monthYear.slice(3,4)
+            return newString
+        }
     }
     
-    
-    useEffect(
-        ()=>{        
-            fetchData()
-
-        }, [])
     
 
     return ( 
-        <>
-       {isLoading ? <p>Carregando...</p> : 
-       <>
-       
-       <div>{months[monthsShow][0]} </div>
-       <button onClick= {()=> setMonthsShow( monthsShow >= months.length - 1 ? monthsShow : monthsShow + 1)}>+</button>
-       
-       <button onClick= {()=> setMonthsShow( monthsShow > 0 ? monthsShow - 1 : monthsShow)}>-</button>
-
-       <section  className='flex gap-2'>
-           {
-            Object.entries(months[monthsShow][1]).map( week=> {
-                return (<div>{week[0]}
-                
-                {week[1].map(day =>{
-                    return  <p >{(Object.keys(day))}</p>
-                })}
-                </div>)
-            })
-           }
-       </section>
+        <> 
+        {dataReload('5', '22-5')}
+       <h1>TESTE</h1>
        </>
-       
-       } 
-
-       
-       
-    
-        </>
 
         )
     }

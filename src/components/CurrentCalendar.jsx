@@ -38,12 +38,13 @@ export function CurrentCalendar({openModal, months, month}){
                                <div className=' flex flex-col gap-5'>
                                    {
                                        week[1].map(day=>{
+                                           
                                            if( Object.keys(day) == 0){
                                                return <p> <br/> </p>
                                            }
                                            else{
                                                 
-                                               return  <CalendarDay dayOfMonth =  {Object.keys(day)} month={month}  />
+                                               return  <CalendarDay dayOfMonth =  {Object.keys(day)} month={month} key={Object.keys(day)[0]} />
                                            }
                                        })
                                    }
