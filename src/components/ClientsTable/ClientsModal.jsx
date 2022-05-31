@@ -5,6 +5,8 @@ import RegisterModal from '../Register/RegisterModal'
 import{Link} from 'react-router-dom'
 import { Header } from '../Header'
 import AppContext from '../../context/AppContext'
+import Checked from '../Checked'
+import {translateDictionary} from '../DataConvert'
 
 import { useContext } from 'react'
 import axios from 'axios'
@@ -15,7 +17,10 @@ function ClientsModal({registerModal, closeModal}) {
     const [isLoading, setIsLoading] = useState(true)
     const {dayOfTable, setDayOfTable} = useContext(AppContext)
     const {monthWeekDay, setMonthWeekDay} = useContext(AppContext)
+    const {weekDay, setWeekDay} = useContext(AppContext)
     
+   
+
     var newDay = dayOfTable
     if(dayOfTable <10){
         var newDay = '0' + dayOfTable
@@ -50,7 +55,7 @@ function ClientsModal({registerModal, closeModal}) {
     
     useEffect(
         () => {
-            console.log(url)
+            
             fetchData()
             
             
@@ -63,13 +68,14 @@ function ClientsModal({registerModal, closeModal}) {
   return (
       <>
       <Header/>
+      
     <div className=" bg-fixed flex  justify-center bg-gray-400 bg-opacity-70 w-full h-[200%] absolute top-0 sm:h-[100%]">
         
         <div className=" fixed bg-zinc-50 shadow-2xl mt-10 shadow-gray-500 w-[100%] h-[100vh] top-[-40px] sm:w-[90%] sm:h-[80%] sm:top-[0] sm:rounded-2xl">
         
         <div className=' relative rounded-tl-lg flex-1 text-center'>
            
-            <h1 className='  font-bold text-4xl mt-3 mb-3 uppercase  sm:text-center'>{monthWeekDay} {dayOfTable}</h1>
+            <h1 className='  font-bold text-4xl mt-3 mb-3 uppercase  sm:text-center'>{translateDictionary[weekDay]} - {dayOfTable}/{monthWeekDay.slice(5,7)} </h1>
             
             <Link to='/' className='absolute right-0 top-[-15px]  sm:top-0 sm:right-5 '>
                  <XCircle size={32} weight="fill" color='red' />
@@ -92,7 +98,7 @@ function ClientsModal({registerModal, closeModal}) {
                      
                         <tbody>
                             
-                        {clients.map(client=>{
+                        { isLoading ? <tr>Carregando... </tr> :clients.map(client=>{
                             
                             return(
                                 <tr valign="top"  className=''>
@@ -106,7 +112,7 @@ function ClientsModal({registerModal, closeModal}) {
                                         </div>
                                         <div >
                                             <b>Sexo</b>                                    
-                                            <span >{client.sex}</span>
+                                            <span >{translateDictionary[client.sex]}</span>
                                         </div>
                                         <div >
                                             <b>Tema</b>                                    
@@ -118,11 +124,12 @@ function ClientsModal({registerModal, closeModal}) {
                                         {client.type}
                                         <br/><br/>
                                         <div >
-                                            <label>Miolo <button></button></label>
-                                            <label>Miolo <button></button></label>
+                                           <Checked id={client.id} core_status = {client.core_status} cover_status ={client.cover_status} />                                       
+                                                                
+                                            
                                             
                                         </div>
-                                       
+
                                         
                                     </td> 
         

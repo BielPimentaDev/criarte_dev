@@ -28,6 +28,7 @@ export function Main(){
         setData(results.data)
         setMonths(jsonData)
         setIsLoading(false)
+        
     }
     
     

@@ -17,7 +17,11 @@ export const translateDictionary = {
     'thursday' : 'Quinta-feira',
     'friday' : 'Sexta-feira',
     'saturday' : 'Sábado',
-    'sunday' : 'Domingo'
+    'sunday' : 'Domingo',
+    'male': 'masculino',
+    'female' : 'feminino',
+    'cover_status' : 'capa',
+    'core_status' :'miolo'
 
 }
 

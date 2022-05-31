@@ -34,9 +34,10 @@ function RegisterModal() {
             )
                 .then(res => console.log(res))
                 .catch(err => {
+                    console.log(err)
                     if(err.response.data['detail'] == "The day's capacity is full"){
                         alert('Capacidade máxima atingida!')
-                        console.log(err)
+                        
                     }
                 })
             reset()
@@ -107,9 +108,14 @@ function RegisterModal() {
                     </section>
 
                     <section className='rowSection'>
-                        <div className='inputContainer'>                            
-                            <input type="text" placeholder=' ' className='inputForm' name='sexName' {...register('sexName')}></input>
-                            <label className='inputLabel'> Sexo::</label>
+                        <div className='inputContainer'>   
+
+                            <select name='sexName' className='inputForm' {...register('sexName')}>
+                            
+                                <option value='male'>Masculino</option>
+                                <option value='female'>Feminino</option>
+                            </select>
+                            
                             
                         </div>
                         <div className='inputContainer'>                            
@@ -128,14 +134,20 @@ function RegisterModal() {
                     </section>
                     <section className='rowSection'>
                         <div className='inputContainer'>                            
+                            
                             <input type="text" placeholder=' ' className='inputForm' name='priceName' {...register('priceName')}></input>
+                            
                             <label className='inputLabel'> Preço:</label>
                             
                         </div>
-                        <div className='inputContainer'>                            
-                            <input type="text" placeholder=' ' className='inputForm' name='payName' {...register('payName')}></input>
-                            <label className='inputLabel'> Pagamento:</label>
-                            
+                        <div className='inputContainer'>  
+
+                           
+                            <select name='payName' className='inputForm' {...register('payName')}>                                
+                                <option value='pix'>PIX</option>
+                                <option value='boleto'>Boleto</option>
+                                <option value='cartão'>Cartão</option>
+                            </select>
                         </div>
                        
                     </section>

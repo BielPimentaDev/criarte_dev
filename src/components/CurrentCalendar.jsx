@@ -39,12 +39,21 @@ export function CurrentCalendar({openModal, months, month}){
                                    {
                                        week[1].map(day=>{
                                            
+                                           
                                            if( Object.keys(day) == 0){
+                                               
                                                return <p> <br/> </p>
                                            }
                                            else{
-                                                
-                                               return  <CalendarDay dayOfMonth =  {Object.keys(day)} month={month} key={Object.keys(day)[0]} />
+                                                {
+                                                    const clientsQuant = (Object.values(day)[0]).length
+                                                    var full = ''
+                                                    if (clientsQuant == 10){
+                                                        var full = 'full'
+                                                    }
+                                                    
+                                                }
+                                               return  <CalendarDay dayOfWeek = {week[0]} dayOfMonth =  {Object.keys(day)} month={month} key={Object.keys(day)[0]} isFull={full} />
                                            }
                                        })
                                    }

@@ -17,23 +17,26 @@ const DayButton = styled.button`
             }
 `
 
-function CalendarDay({dayOfMonth, isFull, openModal, month}) {
+function CalendarDay({dayOfMonth,dayOfWeek, isFull, openModal, month}) {
     
     const {dayOfTable, setDayOfTable} = useContext(AppContext)
     const {monthWeekDay, setMonthWeekDay} = useContext(AppContext)
+    const {weekDay, setWeekDay} = useContext(AppContext)
     
     
-    function dayButtonClick(month){
-            
-            setDayOfTable(dayOfMonth)
-            setMonthWeekDay(month)
+    function dayButtonClick(month, dayOfWeek){
+        setDayOfTable(dayOfMonth)
+        setMonthWeekDay(month)
+        setWeekDay(dayOfWeek)
+        
+        
             
     }
 
     return (
         
         <Link to='/clients-table'>
-            <DayButton onClick={() => dayButtonClick(month)} isFull={isFull} >
+            <DayButton onClick={() => dayButtonClick(month, dayOfWeek)} isFull={isFull} >
             
             {dayOfMonth}
             </DayButton>        
