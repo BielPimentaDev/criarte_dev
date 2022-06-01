@@ -72,5 +72,8 @@ export const ClientsTable = styled.table`
                 background-color:#DDDADA;
             }
            }
+
+
+           
            
 `
