@@ -3,8 +3,8 @@ import styled from 'styled-components'
 
 export const RegisterForm = styled.form`
         height: 80%;
-        width: 50%;
-        max-width: 400px;
+        width: 90%;
+        max-width: 500px;
         margin: auto;                
         display: flex;
         flex-direction: column;
@@ -23,6 +23,20 @@ export const RegisterForm = styled.form`
             justify-content:space-around;
             gap:30px;
         }
+        .textAreaINput{
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px
+        }
+        
+
+        .textAreaContainer{
+            position:relative;
+            display:flex;
+            justify-content: center;
+           
+        }
+        
 
         .inputContainer{
             position:relative;
@@ -38,6 +52,7 @@ export const RegisterForm = styled.form`
             bottom:4px;
             font-size:1.15rem;
             transition: all 0.3s ease;
+            
             
             
 

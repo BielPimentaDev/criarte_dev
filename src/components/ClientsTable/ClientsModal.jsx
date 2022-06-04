@@ -101,7 +101,8 @@ function ClientsModal({ registerModal, closeModal }) {
                                     return (
                                         <tr valign="top" className=''>
 
-                                            <td >
+                                            <td title={client.observations} >
+                                                
                                                 {client.client_name}
                                                 <br />
                                                 <div >
@@ -118,8 +119,8 @@ function ClientsModal({ registerModal, closeModal }) {
                                                 </div>
                                             </td>
 
-                                            <td >
-                                                {client.type}
+                                            <td  title={client.observations} >
+                                               {client.type} 
                                                 <br /><br />
                                                 <div >
                                                     <Checked id={client.id} core_status={client.core_status} cover_status={client.cover_status} />
@@ -131,7 +132,7 @@ function ClientsModal({ registerModal, closeModal }) {
 
                                             </td>
 
-                                            <td >
+                                            <td  title={client.observations} >
                                                 {client.price}
                                                 <br /><br />
                                                 <div >
@@ -141,7 +142,7 @@ function ClientsModal({ registerModal, closeModal }) {
 
                                             </td>
 
-                                            <td >
+                                            <td title={client.observations} >
 
                                                 {client.client_state}
                                                 <br /><br />

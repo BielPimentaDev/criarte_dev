@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { Header } from '../Header';
 import { RegisterForm } from './RegisterModalStyle';
+import {allStates, allStatesInitials} from '../DataConvert'
 
 function RegisterModal() {
 
@@ -24,6 +25,7 @@ function RegisterModal() {
                 "price": data.priceName,
                 "sex": data.sexName,
                 "payment": data.payName,
+                "observations" : data.observationsName,
                 "day": newDate,
                 "client": {
                     "name": data.clientName,
@@ -78,28 +80,27 @@ function RegisterModal() {
 
                     <RegisterForm onSubmit={handleSubmit(onSubmit)}>
 
-                        <section>
+                    <section className='rowSection'>
                             <div className='inputContainer'>
                                 <input type="text" placeholder=' ' className='inputForm' name='clientName' {...register('clientName')}></input>
                                 <label className='inputLabel'> Cliente:</label>
 
                             </div>
-                        </section>
-                        <section>
+                       
                             <div className='inputContainer'>
                                 <input type="text" placeholder=' ' className='inputForm' name='productName' {...register('productName')}></input>
                                 <label className='inputLabel'> Produto:</label>
 
                             </div>
                         </section>
-                        <section>
+
+                        <section className='rowSection'>
                             <div className='inputContainer'>
                                 <input type="text" placeholder=' ' className='inputForm' name='printedName' {...register('printedName')}></input>
-                                <label className='inputLabel'> Nome impresso:</label>
+                                <label for='inputForm' className='inputLabel'> Nome impresso:</label>
 
                             </div>
-                        </section>
-                        <section>
+                        
                             <div className='inputContainer'>
                                 <input type="text" placeholder=' ' className='inputForm' name='themeName' {...register('themeName')}></input>
                                 <label className='inputLabel'> Tema:</label>
@@ -113,14 +114,21 @@ function RegisterModal() {
                                 <select name='sexName' className='inputForm' {...register('sexName')}>
 
                                     <option value='male'>Masculino</option>
-                                    <option value='female ' selected>Feminino</option>
+                                    <option value='female' selected>Feminino</option>
                                 </select>
 
 
                             </div>
                             <div className='inputContainer'>
-                                <input type="text" placeholder=' ' className='inputForm' name='stateName' {...register('stateName')}></input>
-                                <label className='inputLabel'> Estado:</label>
+                                <select type="text" placeholder=' ' className='inputForm' name='stateName' {...register('stateName')}>
+                                    <option value="" selected disabled >Selecione um Estado</option>
+                                    {
+                                        allStatesInitials.map(
+                                            state => {return (<option value={state} key={state}  >{state}</option>)}
+                                        )
+                                    }
+                                </select>
+                                
 
                             </div>
 
@@ -146,23 +154,23 @@ function RegisterModal() {
                                 <select name='payName' className='inputForm' {...register('payName')}>
                                     <option value='pix'>PIX</option>
                                     <option value='boleto'>Boleto</option>
-                                    <option value='cartão'>Cartão</option>
+                                    <option value='cartao'>Cartão</option>
                                 </select>
                             </div>
 
                         </section>
 
                         <section>
-                            <div className='inputContainer'>
-                                <textarea type="text" rows='4' colw='50' placeholder=' ' className='inputForm' name='clientObservations' {...register('clientObservations')}></textarea>
-                                <label className='inputLabel'> Observações:</label>
+                            <div className='textAreaContainer'>
+                                <textarea type="text" placeholder= 'Observações...' rows='4' colw='40'  className='textAreaINput' name='observationsName' {...register('observationsName')}></textarea>
+                                
 
                             </div>
                         </section>
 
 
 
-                        <button type='submit' className='mt-5 bg-brandOrange-500 text-white px-10  w-full text-2xl sm:rounded-lg  sm:mt-[-60px] sm:w-[full] h-[80px] '> CADASTRAR</button>
+                        <button type='submit' className='bg-brandOrange-500   text-white sm:h-10'> CADASTRAR</button>
                     </RegisterForm>
 
                 </container>
@@ -174,3 +182,4 @@ function RegisterModal() {
 }
 
 export default RegisterModal;
+
