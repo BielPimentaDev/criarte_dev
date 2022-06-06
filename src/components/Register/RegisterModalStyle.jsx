@@ -7,10 +7,10 @@ export const RegisterForm = styled.form`
         height: 80%;
         width: 90%;
         max-width: 500px;
-        margin: auto;                
+        margin: 50px auto;                
         display: flex;
         flex-direction: column;
-        
+        padding: 15px;
         
         gap: 50px;
 
@@ -25,8 +25,11 @@ export const RegisterForm = styled.form`
             justify-content:space-around;
             gap:30px;
         }
+
         .textAreaINput{
-            border: 1px solid black;
+            background-color:#F9F9F9;
+            box-shadow: 0px 4px 4px 0px #00000040 inset;
+            
             border-radius: 5px;
             padding: 10px
         }
@@ -36,6 +39,7 @@ export const RegisterForm = styled.form`
             position:relative;
             display:flex;
             justify-content: center;
+            
            
         }
         
@@ -52,14 +56,21 @@ export const RegisterForm = styled.form`
             font-weight: 700;
             left:10px;
             bottom:4px;
-            font-size:1.15rem;
+            font-size:1rem;
             transition: all 0.3s ease;
             
             
             
 
         }
-        
+
+        .inputForm[type="text"]{
+            background-color:#F9F9F9;
+            box-shadow: 0px 4px 4px 0px #00000040 inset;
+            
+
+        }
+       
 
         .inputForm:focus ~ .inputLabel, .inputForm:not(:placeholder-shown).inputForm:not(:focus) ~ .inputLabel{
             color:var(--orange);
@@ -79,7 +90,7 @@ export const RegisterForm = styled.form`
         .inputContainer input{
             transition: all 0.3s ease; 
             width:100%;
-            border: 1px solid black;
+            
             border-radius:8px;
             padding:3px;
             font-family: inherit;

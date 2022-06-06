@@ -7,6 +7,7 @@ import AppContext from '../../context/AppContext';
 import { Header } from '../Header';
 import { RegisterForm } from './RegisterModalStyle';
 import {allStates, allStatesInitials} from '../DataConvert'
+import './Style.css'
 
 function RegisterModal() {
 
@@ -50,23 +51,23 @@ function RegisterModal() {
         <>
             <Header />
 
-            <div className=" bg-fixed flex  justify-center bg-gray-400 bg-opacity-70 w-full h-[100%] absolute top-0 ">
+            
+                <div className='opacityDiv'>
 
-                <container className="bg-white my-auto  h-full w-full  sm:w-[70%] sm:h-[50%] sm:rounded-t-3xl sm:shadow-2xl">
-                    <section className="flex justify-between p-5 items-center relative mb-20">
+                
+                <div className="formContainer">
+                    <section className="topSectionForm">
 
 
                         <Link to='/clients-table'>
-                            <button className='flex items-center text-xl'>
+                            <button className='backButton'>
                                 <CaretLeft size={40} weight="fill" color='#A1D1FF' />
-                                <span className='hidden sm:block'>VOLTAR</span>
+                                
                             </button></Link>
 
-                        <span className='flex items-center flex-col  absolute left-[50%] translate-x-[-50%] top-2'>
-                            <Users size={60} weight="fill" />
-                            <h1 className='font-bold uppercase  text-4xl sm:text-3xl '>
-
-                                Cadastro
+                        <span>
+                            
+                            <h1>Cadastro
                             </h1>
                         </span>
 
@@ -124,7 +125,7 @@ function RegisterModal() {
 
                             </div>
                             <div className='inputContainer'>
-                                <select type="text" placeholder=' ' className='inputForm' name='stateName' {...register('stateName')}>
+                                <select  placeholder=' ' className='inputForm' name='stateName' {...register('stateName')}>
                                     <option value="" selected disabled >Selecione um Estado</option>
                                     {
                                         allStatesInitials.map(
@@ -166,7 +167,8 @@ function RegisterModal() {
 
                         <section>
                             <div className='textAreaContainer'>
-                                <textarea type="text" placeholder= 'Observações...' rows='4' colw='40'  className='textAreaINput' name='observationsName' {...register('observationsName')}></textarea>
+                                
+                                <textarea type="text" placeholder= 'Detalhes do pedido...' rows="4" cols="50"  className='textAreaINput' name='observationsName' {...register('observationsName')}></textarea>
                                 
 
                             </div>
@@ -174,13 +176,14 @@ function RegisterModal() {
 
 
 
-                        <button type='submit' className='bg-brandOrange-500   text-white sm:h-10'> CADASTRAR</button>
+                        <button type='submit' className='formButton bg-brandOrange-500   text-white sm:h-10'> CADASTRAR</button>
                     </RegisterForm>
                     </container>
 
-                </container>
+                </div>
+                </div>
 
-            </div>
+            
         </>
 
     );
