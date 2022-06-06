@@ -52,7 +52,7 @@ function RegisterModal() {
 
             <div className=" bg-fixed flex  justify-center bg-gray-400 bg-opacity-70 w-full h-[100%] absolute top-0 ">
 
-                <container className="bg-white my-auto  h-full w-full  sm:w-[70%] sm:h-[90%] sm:rounded-t-3xl sm:shadow-2xl">
+                <container className="bg-white my-auto  h-full w-full  sm:w-[70%] sm:h-[50%] sm:rounded-t-3xl sm:shadow-2xl">
                     <section className="flex justify-between p-5 items-center relative mb-20">
 
 
@@ -78,6 +78,10 @@ function RegisterModal() {
                         </Link>
                     </section>
 
+
+                    <container >
+                        
+                   
                     <RegisterForm onSubmit={handleSubmit(onSubmit)}>
 
                     <section className='rowSection'>
@@ -172,6 +176,7 @@ function RegisterModal() {
 
                         <button type='submit' className='bg-brandOrange-500   text-white sm:h-10'> CADASTRAR</button>
                     </RegisterForm>
+                    </container>
 
                 </container>
 

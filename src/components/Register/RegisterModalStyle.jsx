@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 
 export const RegisterForm = styled.form`
+        
+        
         height: 80%;
         width: 90%;
         max-width: 500px;
