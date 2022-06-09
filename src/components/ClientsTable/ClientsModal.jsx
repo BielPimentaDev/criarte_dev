@@ -47,7 +47,7 @@ function ClientsModal({ registerModal, closeModal }) {
         axios.get(url)
             .then(res => setClients(res.data))
             .catch(err => console.log(err))
-            .finally(setIsLoading(true))
+            .finally(setIsLoading(false))
             
 
     }
