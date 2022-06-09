@@ -71,7 +71,7 @@ export function Main(){
     ariaLabel='Carregando...'
   />
   
-  <label>Carregando...</label>
+  
    </div>: 
         <>
     <Header/>
