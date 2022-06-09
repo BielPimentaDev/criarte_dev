@@ -7,8 +7,9 @@ export function AppContextProvider({children}){
     const [monthWeekDay, setMonthWeekDay] = useState()
     const [data, setData] = useState()
     const [weekDay, setWeekDay] = useState()
+    const [monthsShow, setMonthsShow] = useState(1)
     return(
-        <AppContext.Provider value={{ dayOfTable, setDayOfTable, monthWeekDay, setMonthWeekDay, data, setData,weekDay, setWeekDay}}>
+        <AppContext.Provider value={{ monthsShow, setMonthsShow, dayOfTable, setDayOfTable, monthWeekDay, setMonthWeekDay, data, setData,weekDay, setWeekDay}}>
             {children}
         </AppContext.Provider>
     )

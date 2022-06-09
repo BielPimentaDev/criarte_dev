@@ -35,13 +35,14 @@ function RegisterModal() {
                 }
             }
         )
-            .then(res => console.log(res))
+            .then(res => alert('Cadastrado com sucesso!'))
             .catch(err => {
                 console.log(err)
                 if (err.response.data['detail'] == "The day's capacity is full") {
-                    alert('Capacidade máxima atingida!')
+                    alert('Capacidade máxima atingida!')}
+                else (alert('Cadastro nao realizado! Tentar novamente'))
 
-                }
+                
             })
         reset()
     }
@@ -148,7 +149,7 @@ function RegisterModal() {
                         <section className='rowSection'>
                             <div className='inputContainer'>
 
-                                <input type="text" placeholder=' ' className='inputForm' name='priceName' {...register('priceName')}></input>
+                                <input type="number" step= 'any' step= '0.1' placeholder=' ' className='inputForm' name='priceName' {...register('priceName')}></input>
 
                                 <label className='inputLabel'> Preço:</label>
 

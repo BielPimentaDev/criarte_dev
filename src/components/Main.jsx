@@ -5,17 +5,27 @@ import axios from 'axios'
 import { useEffect, useState, useContext } from 'react';
 import {monthsTranslate, translateDictionary} from './DataConvert'
 import AppContext from '../context/AppContext'
-
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { ThreeDots } from  'react-loader-spinner'
+import nameLogo from '../imgs/nameLogo.jpg'
+import './mainStyle.css'
 
 export function Main(){
 
+    
+    
+
     const [months, setMonths] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [monthsShow, setMonthsShow] = useState(1)
+    
+    const {monthsShow, setMonthsShow} = useContext(AppContext)
     const {data, setData} =  useContext(AppContext)
+    
+
+     
+    const url = `https://thayxis.herokuapp.com/api/v1/products`
 
     
-    const url = 'https://thayxis.herokuapp.com/api/v1/products'
     
     const callApi= async () => {
         const results = await axios.get(url)
@@ -28,6 +38,10 @@ export function Main(){
         setData(results.data)
         setMonths(jsonData)
         setIsLoading(false)
+                
+        
+        
+
         
     }
     
@@ -35,10 +49,11 @@ export function Main(){
     useEffect(
         ()=>{        
             fetchData()
+            
 
         }, [])
     
-
+        
 
 
 
@@ -46,7 +61,18 @@ export function Main(){
 
     return(
         <>
-        {isLoading ? <p>Carregando...</p> : 
+        {isLoading ? <div className= 'divLoading'>
+        <img src={nameLogo} className='logoName'/>
+             <ThreeDots
+        
+    height="100"
+    width="100"
+    color='#A1D1FF'
+    ariaLabel='Carregando...'
+  />
+  
+  <label>Carregando...</label>
+   </div>: 
         <>
     <Header/>
    
@@ -55,6 +81,7 @@ export function Main(){
     <section className="flex justify-center m-10 sm:justify-end  ">
         <button className="flex items-center gap-2 uppercase bg-brandOrange-500 px-3 py-2 text-white rounded-2xl">
             <Calendar size={25} weight={"fill"}/>
+            
             Calendário
             </button>
     </section>

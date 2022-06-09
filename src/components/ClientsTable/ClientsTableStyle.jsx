@@ -14,6 +14,7 @@ export const ClientsTable = styled.table`
            }
 
            thead tr{
+                
                padding: 10px;
                font-size: 1.5rem
            }
@@ -22,7 +23,7 @@ export const ClientsTable = styled.table`
            }
 
            tbody tr{
-               
+               position: relative;
                cursor:pointer;
                background-color: #E6E6E6;
                font-weight: 400;
@@ -37,12 +38,28 @@ export const ClientsTable = styled.table`
            }
 
            tbody tr td{
-               position: relative;
+               position:relative;
                 padding: 15px 0;
                 
                 
                
            }
+           .trashButton{
+               flex:none;
+               display:block;
+               opacity:0;
+               transition: 0.2s;
+               color:#FF8080;
+               position:absolute;
+               right:5px;
+               top:5px;
+               z-index:1;
+           }
+           tbody tr:hover .trashButton{
+               opacity:1;
+           }
+           
+           
            
            tbody tr div{
                opacity:0;

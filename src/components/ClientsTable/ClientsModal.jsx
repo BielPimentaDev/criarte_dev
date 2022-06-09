@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { XCircle } from 'phosphor-react'
+import { XCircle, Trash } from 'phosphor-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import AppContext from '../../context/AppContext'
@@ -47,7 +47,8 @@ function ClientsModal({ registerModal, closeModal }) {
         axios.get(url)
             .then(res => setClients(res.data))
             .catch(err => console.log(err))
-            .finally(setIsLoading(false))
+            .finally(setIsLoading(true))
+            
 
     }
 
@@ -62,6 +63,14 @@ function ClientsModal({ registerModal, closeModal }) {
         []
     )
 
+    function deleteClient(id){
+        axios.delete(`https://thayxis.herokuapp.com/api/v1/products/${id}`)
+            .then(res => {
+                console.log(res)
+                fetchData()
+                })
+            .catch(err => console.log(err))
+    }
 
     return (
         <>
@@ -99,9 +108,10 @@ function ClientsModal({ registerModal, closeModal }) {
                                 {isLoading ? <tr>Carregando... </tr> : clients.map(client => {
 
                                     return (
+                                        <> 
                                         <tr valign="top" className=''>
-
                                             <td title={client.observations} >
+                                       
                                                 
                                                 {client.client_name}
                                                 <br />
@@ -144,6 +154,7 @@ function ClientsModal({ registerModal, closeModal }) {
 
                                             <td title={client.observations} >
 
+                                                <button className='trashButton' onClick = {() => deleteClient(client.id)}><Trash size={25} weight="fill" /> </button>
                                                 {client.client_state}
                                                 <br /><br />
                                                 <div >
@@ -153,12 +164,13 @@ function ClientsModal({ registerModal, closeModal }) {
                                                     <b>Rua</b>
                                                     <span ><p>{client.client_address}</p></span>
                                                 </div>
-
                                             </td>
 
                                         </tr>
+                                        </>
                                     )
                                 })}
+                                
                             </tbody>
 
                         </ClientsTable>
