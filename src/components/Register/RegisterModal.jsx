@@ -27,7 +27,7 @@ function RegisterModal() {
     const url = 'https://thayxis.herokuapp.com/api/v1/products'
 
     const onSubmit = data => {
-       
+             console.log(data)
 
             const newDate = (monthWeekDay + '-' + dayOfTable[0])
             const dataRegister =  {
@@ -62,6 +62,7 @@ function RegisterModal() {
         
             
             products?.map(
+
                 product=>{
                     const newDate = (monthWeekDay + '-' + dayOfTable[0])
                     const productName = 'productName_' + product
@@ -79,7 +80,7 @@ function RegisterModal() {
                         "price": data[priceName],
                         "payment":  data[payName],
                         "observations" :  data[observationsName],
-                        "sex": data.data[sexName],
+                        "sex": data[sexName],
                         "day": newDate,
                         "client": {
                             "name": data.clientName,
@@ -87,6 +88,8 @@ function RegisterModal() {
                             "state": data.stateName
                         }
                 }
+                console.log(dataRegister)
+                
                 
                 axios.post(url,
                     dataRegister

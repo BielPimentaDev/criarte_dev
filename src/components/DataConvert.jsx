@@ -92,7 +92,7 @@ export const productsList = ['Agenda 1 dpp', 'Agenda 2 dpp','Agendamento profiss
 'Kit Maternida I ',
 'Kit Maternida II',
 'Kit Maternida III ',
-',Kit Maternida IV',
+'Kit Maternida IV',
 'Kit Maternida V',
 'Livro do bebê',
 'Mesversario',
