@@ -11,11 +11,12 @@ import { ClientsTable } from './ClientsTableStyle'
 
 function ClientsModal({ registerModal, closeModal }) {
 
-    const [clients, setClients] = useState([])
+    
     const [isLoading, setIsLoading] = useState(true)
     const { dayOfTable, setDayOfTable } = useContext(AppContext)
     const { monthWeekDay, setMonthWeekDay } = useContext(AppContext)
     const { weekDay, setWeekDay } = useContext(AppContext)
+    const { clients, setClients } = useContext(AppContext)
 
 
 
@@ -46,16 +47,19 @@ function ClientsModal({ registerModal, closeModal }) {
     function fetchData() {
         axios.get(url)
             .then(res => setClients(res.data))
+            .then(res => setClientQtf(clients.length))
             .catch(err => console.log(err))
-            .finally(setIsLoading(false))
-            
-
+            .finally(setIsLoading(false))    
     }
+
+   
 
     useEffect(
         () => {
 
             fetchData()
+            
+            
 
 
         },
@@ -74,7 +78,9 @@ function ClientsModal({ registerModal, closeModal }) {
 
     return (
         <>
+        
             <Header />
+            
 
             <div className=" bg-fixed flex  justify-center bg-gray-400 bg-opacity-70 w-full h-[200%] absolute top-0 sm:h-[100%]">
 
@@ -105,9 +111,12 @@ function ClientsModal({ registerModal, closeModal }) {
 
                             <tbody>
 
-                                {isLoading ? <tr>Carregando... </tr> : clients.map(client => {
+                                {isLoading ? <tr>Carregando... </tr> : 
+                                
+                                clients.map(client => {
 
                                     return (
+
                                         <> 
                                         <tr valign="top" className=''>
                                             <td title={client.observations} >

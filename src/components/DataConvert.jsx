@@ -86,3 +86,16 @@ export function monthsTranslate (monthNumber){
     return month
 }
 
+
+export const productsList = ['Agenda 1 dpp', 'Agenda 2 dpp','Agendamento profissional',' Album de fotos', 'Bloco A6', 'Planner','Controle financeiro ', 'Caderneta de Gestante ',
+'Caderneta de Vacinação','Caderneta Pet ','Caderno A5','Caderno de pedidos ','Caderno Universitario ','Diario de gestante ',
+'Kit Maternida I ',
+'Kit Maternida II',
+'Kit Maternida III ',
+',Kit Maternida IV',
+'Kit Maternida V',
+'Livro do bebê',
+'Mesversario',
+'Mini agenda ',
+'Porta documentos']
+

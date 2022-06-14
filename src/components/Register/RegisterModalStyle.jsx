@@ -5,6 +5,9 @@ export const RegisterForm = styled.form`
         
         
         height: 80%;
+        
+        
+
         width: 90%;
         max-width: 500px;
         margin: 50px auto;                
@@ -101,8 +104,23 @@ export const RegisterForm = styled.form`
             padding-left:10px;
         }
 
+
+    
+
         @media(max-width:600px){
            width:90%;
+           .rowSection{
+            flex-direction:column;
+           }
         }
 
+`
+export const PlusButton = styled.div`
+        transition: all 0.3s
+        width:50px;
+        margin: auto;
+        cursor: ${props=> props.fullClient ? 'pointer' : '' };
+        
+            
+            
 `

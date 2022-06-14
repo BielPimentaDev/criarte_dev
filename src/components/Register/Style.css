@@ -2,18 +2,20 @@
     background-color: rgba(200, 200, 200, 0.7);
     position: absolute;
     top:0;
-    width: 100%;
-    
+    width: 98.5vw;
+    height:100vh;
     z-index:0;
 
 }
 
 .formContainer{
     max-width:850px;
+    overflow:auto;
     background-color:white;
     width:80%;
-    height: 80%;
-    margin: -20px auto;
+    max-height: 100vh;
+    margin: 10px auto;
+    position:relative;    
     border-radius: 10px;
     box-shadow: 8px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
@@ -27,6 +29,10 @@
     align-items: center;
     align-content: center;
     padding:20px;
+    background-color:white;
+    z-index:1;
+    position: sticky;
+    top:0;
 }
 
 .backButton{
@@ -42,12 +48,21 @@
 }
 
 .formButton{
+    position:sticky;
+    bottom:20px;    
+    background-color: var(--orange);
+    width: 100%;
+    height:100%;
+    margin:auto;
+   
     
-    background-color: var(--orange)
+    
 }
 
 
-
+hr{
+    border-top: 1px solid black
+}
 
 @media(max-width: 600px){
     .formContainer{
@@ -61,8 +76,8 @@
         
     }
     .formButton{
-        position:absolute;
-        bottom:0;
+        
+        bottom:-0px;
         left:0;
         width:100%;
         height: 50px;

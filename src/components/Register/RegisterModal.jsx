@@ -1,25 +1,36 @@
 import axios from 'axios';
-import { CaretLeft, Users, XCircle } from 'phosphor-react';
-import { useContext } from 'react';
+import { CaretLeft, Users, XCircle, PlusCircle } from 'phosphor-react';
+import { useContext, useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AppContext from '../../context/AppContext';
 import { Header } from '../Header';
-import { RegisterForm } from './RegisterModalStyle';
-import {allStates, allStatesInitials} from '../DataConvert'
+import { RegisterForm, PlusButton } from './RegisterModalStyle';
+import {allStates, allStatesInitials, productsList} from '../DataConvert'
 import './Style.css'
 
 function RegisterModal() {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { clients, setClients } = useContext(AppContext)
     const { dayOfTable, setDayOfTable } = useContext(AppContext)
     const { monthWeekDay, setMonthWeekDay } = useContext(AppContext)
 
+    let navigate = useNavigate()
+   
+    
+
+    const [products, setProducts] = useState([])
+    const [clientCount, setClientCount] = useState(clients.length)
+    
+
     const url = 'https://thayxis.herokuapp.com/api/v1/products'
+
     const onSubmit = data => {
-        const newDate = (monthWeekDay + '-' + dayOfTable[0])
-        axios.post(url,
-            {
+       
+
+            const newDate = (monthWeekDay + '-' + dayOfTable[0])
+            const dataRegister =  {
                 "type": data.productName,
                 "printed_name": data.printedName,
                 "theme": data.themeName,
@@ -34,19 +45,87 @@ function RegisterModal() {
                     "state": data.stateName
                 }
             }
-        )
-            .then(res => alert('Cadastrado com sucesso!'))
-            .catch(err => {
-                console.log(err)
-                if (err.response.data['detail'] == "The day's capacity is full") {
-                    alert('Capacidade máxima atingida!')}
-                else (alert('Cadastro nao realizado! Tentar novamente'))
-
+    
+            axios.post(url,
+               dataRegister
+            )
+                .then(res => alert('Cadastrado com sucesso!'))
+                .catch(err => {
+                    console.log(err)
+                    if (err.response.data['detail'] == "The day's capacity is full") {
+                        alert('Capacidade máxima atingida!')}
+                    else (alert('Cadastro nao realizado! Tentar novamente'))
+    
+                    
+                })
+            
+        
+            
+            products?.map(
+                product=>{
+                    const newDate = (monthWeekDay + '-' + dayOfTable[0])
+                    const productName = 'productName_' + product
+                    const printedName = 'printedName_' + product
+                    const themeName = 'themeName_' + product
+                    const priceName = 'priceName_' + product
+                    const payName = 'payName_' + product
+                    const observationsName = 'observationsName_' + product
+                    
+                    const dataRegister =  {
+                        "type":data[productName],
+                        "printed_name": data[printedName] ,
+                        "theme": data[themeName],
+                        "price": data[priceName],
+                        "payment":  data[payName],
+                        "observations" :  data[observationsName],
+                        "sex": data.sexName,
+                        "day": newDate,
+                        "client": {
+                            "name": data.clientName,
+                            "address": data.addressName,
+                            "state": data.stateName
+                        }
+                }
                 
-            })
-        reset()
+                axios.post(url,
+                    dataRegister
+                 )
+                     .then(res => console.log(res))
+                     .catch(err => {
+                         console.log(err)
+                         if (err.response.data['detail'] == "The day's capacity is full") {
+                             alert('Capacidade máxima atingida!')}
+                         else {
+                            const registerFailed = true
+                         }
+         
+                         
+                     })
+            
+                    
+                
+                }
+                )
+
+           
+    reset()
+    registerFailed && alert('Cadastro nao realizado! Tentar novamente')
     }
 
+
+
+
+
+    const iterateProduct = () =>{
+        setProducts([...products, clientCount])
+        setClientCount(clientCount +1) 
+    }
+  const isClientFull =  clientCount < 9 ? true : false 
+  function deleteProduct(index){
+        products.pop()
+        navigate('/client-register')
+        setClientCount(clientCount - 1 )
+  }
     return (
 
         <>
@@ -68,8 +147,11 @@ function RegisterModal() {
 
                         <span>
                             
-                            <h1>Cadastro
+                            <div className = 'flex flex-col items-center'>
+                                <h1>Cadastro
                             </h1>
+                           
+                            </div>
                         </span>
 
 
@@ -81,7 +163,7 @@ function RegisterModal() {
                     </section>
 
 
-                    <container >
+                    <div >
                         
                    
                     <RegisterForm onSubmit={handleSubmit(onSubmit)}>
@@ -94,8 +176,13 @@ function RegisterModal() {
                             </div>
                        
                             <div className='inputContainer'>
-                                <input type="text" placeholder=' ' className='inputForm' name='productName' {...register('productName')}></input>
-                                <label className='inputLabel'> Produto:</label>
+                                <select type="text" placeholder=' ' className='inputForm' name='productName' {...register('productName')}>
+                                    <option value= '' disabled selected >- Produto</option>
+                                    {productsList.map(product=>{
+                                        return <option value={product} key={product}>{product}</option>
+                                    })}
+                                </select>
+                               
 
                             </div>
                         </section>
@@ -149,7 +236,7 @@ function RegisterModal() {
                         <section className='rowSection'>
                             <div className='inputContainer'>
 
-                                <input type="number" step= 'any' step= '0.1' placeholder=' ' className='inputForm' name='priceName' {...register('priceName')}></input>
+                                <input type="number" step= 'any' placeholder=' ' className='inputForm' name='priceName' {...register('priceName')}></input>
 
                                 <label className='inputLabel'> Preço:</label>
 
@@ -163,23 +250,81 @@ function RegisterModal() {
                                     <option value='cartao'>Cartão</option>
                                 </select>
                             </div>
-
-                        </section>
-
+                        </section>                     
+                               
                         <section>
-                            <div className='textAreaContainer'>
+                                <div className='textAreaContainer'>
+                                    
+                                    <textarea type="text" placeholder= 'Detalhes do pedido...' rows="4" cols="50"  className='textAreaINput' name='observationsName' {...register('observationsName')}></textarea>
+                                    
+    
+                                </div>
+                        </section>   
+
+                        {products.map(product=>{
+                            
+                            
+                            return (
+                                <>
+                                <hr/>
+                                <div  className='deleteButton' onClick  = {() => deleteProduct(0)}> <XCircle size={25} weight="fill" color= {'#FF8080'} /> </div>
                                 
-                                <textarea type="text" placeholder= 'Detalhes do pedido...' rows="4" cols="50"  className='textAreaINput' name='observationsName' {...register('observationsName')}></textarea>
-                                
+                                <section className='rowSection'>
+                            <div className='inputContainer'>
+                                <input type="text" placeholder=' ' className='inputForm' name={`printedName_${product}`} {...register(`printedName_${product}`)}></input>
+                                <label for='inputForm' className='inputLabel'> Nome impresso:</label>
+
+                            </div>
+                        
+                            <div className='inputContainer'>
+                                <input type="text" placeholder=' ' className='inputForm' name={`themeName_${product}`} {...register(`themeName_${product}`)}></input>
+                                <label className='inputLabel'> Tema:</label>
 
                             </div>
                         </section>
 
+                                 <select type="text" placeholder=' ' className='inputForm' name={`productName_${product}`} {...register(`productName_${product}`)}>
+                                    <option value= '' disabled selected >- - Selecione um produto</option>
+                                    {productsList.map(product=>{
+                                        return <option value={product} key={product}>{product}</option>
+                                    })}
+                                </select>
 
+                                <section className='rowSection'>
+                                <div className='inputContainer'>
+    
+                                    <input type="number" step= 'any' placeholder=' ' className='inputForm' name={`priceName_${product}`} {...register(`priceName_${product}`)}></input>
+    
+                                    <label className='inputLabel'> Preço:</label>
+    
+                                </div>
+                                <div className='inputContainer'>
+    
+    
+                                    <select name={`payName_${product}`} className='inputForm' {...register(`payName_${product}`)}>
+                                        <option value='pix'>PIX</option>
+                                        <option value='boleto'>Boleto</option>
+                                        <option value='cartao'>Cartão</option>
+                                    </select>
+                                </div>
+                            </section>                     
+                                   
+                            <section>
+                                    <div className='textAreaContainer'>
+                                        
+                                        <textarea type="text" placeholder= 'Detalhes do pedido...' rows="4" cols="50"  className='textAreaINput' name={`observationsName_${product}`} {...register(`observationsName_${product}`)}></textarea>
+                                        
+        
+                                    </div>
+                            </section>  
+                            </>)
+                        })}
+
+                       <PlusButton fullClient = {isClientFull} onClick={ isClientFull && iterateProduct} className='plusButton'> <PlusCircle size={50} weight="fill" color={isClientFull ? '#FC8763' : 'gray'} /> </PlusButton>
 
                         <button type='submit' className='formButton bg-brandOrange-500   text-white sm:h-10'> CADASTRAR</button>
                     </RegisterForm>
-                    </container>
+                    </div>
 
                 </div>
                 </div>
