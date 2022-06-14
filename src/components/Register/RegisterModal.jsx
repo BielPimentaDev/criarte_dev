@@ -68,6 +68,7 @@ function RegisterModal() {
                     const printedName = 'printedName_' + product
                     const themeName = 'themeName_' + product
                     const priceName = 'priceName_' + product
+                    const sexName = 'sexName_' + product
                     const payName = 'payName_' + product
                     const observationsName = 'observationsName_' + product
                     
@@ -78,7 +79,7 @@ function RegisterModal() {
                         "price": data[priceName],
                         "payment":  data[payName],
                         "observations" :  data[observationsName],
-                        "sex": data.sexName,
+                        "sex": data.data[sexName],
                         "day": newDate,
                         "client": {
                             "name": data.clientName,
@@ -167,25 +168,39 @@ function RegisterModal() {
                         
                    
                     <RegisterForm onSubmit={handleSubmit(onSubmit)}>
+                        
+                    
+                        <section className='rowSection'>
+                                <div className='inputContainer'>
+                                    <input type="text" placeholder=' ' className='inputForm' name='clientName' {...register('clientName')}></input>
+                                    <label className='inputLabel'> Cliente:</label>
+                                </div>
+                                <div className='inputContainer'>
+                                    <select  placeholder=' ' className='inputForm' name='stateName' {...register('stateName')}>
+                                        <option value="" selected disabled >Selecione um Estado</option>
+                                        {
+                                            allStatesInitials.map(
+                                                state => {return (<option value={state} key={state}  >{state}</option>)}
+                                            )
+                                        }
+                                    </select>
+                        
+                                </div>
+                        
+                        
+                            </section>
+                            <section>
+                                <div className='inputContainer'>
+                                    <input type="text" placeholder=' ' className='inputForm' name='addressName' {...register('addressName')}></input>
+                                    <label className='inputLabel'> Endereço:</label>
+                                </div>
+                            </section>
 
-                    <section className='rowSection'>
-                            <div className='inputContainer'>
-                                <input type="text" placeholder=' ' className='inputForm' name='clientName' {...register('clientName')}></input>
-                                <label className='inputLabel'> Cliente:</label>
-
-                            </div>
-                       
-                            <div className='inputContainer'>
-                                <select type="text" placeholder=' ' className='inputForm' name='productName' {...register('productName')}>
-                                    <option value= '' disabled selected >- Produto</option>
-                                    {productsList.map(product=>{
-                                        return <option value={product} key={product}>{product}</option>
-                                    })}
-                                </select>
-                               
-
-                            </div>
-                        </section>
+                            
+                        
+                    
+                        <hr/>
+                        
 
                         <section className='rowSection'>
                             <div className='inputContainer'>
@@ -201,38 +216,26 @@ function RegisterModal() {
                             </div>
                         </section>
 
+                        
                         <section className='rowSection'>
-                            <div className='inputContainer'>
-
-                                <select name='sexName' className='inputForm' {...register('sexName')}>
-
-                                    <option value='male'>Masculino</option>
-                                    <option value='female' selected>Feminino</option>
+                                <div className='inputContainer'>
+                                    <select name='sexName' className='inputForm' {...register('sexName')}>
+                                        <option value='male'>Masculino</option>
+                                        <option value='female' selected>Feminino</option>
+                                    </select>
+                                </div>
+                        
+                                <select type="text" placeholder=' ' className='inputForm' name='productName' {...register('productName')}>
+                                    <option value= '' disabled selected >- Produto</option>
+                                    {productsList.map(product=>{
+                                        return <option value={product} key={product}>{product}</option>
+                                    })}
                                 </select>
+                                    </section>
+                               
 
+                            
 
-                            </div>
-                            <div className='inputContainer'>
-                                <select  placeholder=' ' className='inputForm' name='stateName' {...register('stateName')}>
-                                    <option value="" selected disabled >Selecione um Estado</option>
-                                    {
-                                        allStatesInitials.map(
-                                            state => {return (<option value={state} key={state}  >{state}</option>)}
-                                        )
-                                    }
-                                </select>
-                                
-
-                            </div>
-
-                        </section>
-                        <section>
-                            <div className='inputContainer'>
-                                <input type="text" placeholder=' ' className='inputForm' name='addressName' {...register('addressName')}></input>
-                                <label className='inputLabel'> Endereço:</label>
-
-                            </div>
-                        </section>
                         <section className='rowSection'>
                             <div className='inputContainer'>
 
@@ -267,7 +270,7 @@ function RegisterModal() {
                             return (
                                 <>
                                 <hr/>
-                                <div  className='deleteButton' onClick  = {() => deleteProduct(0)}> <XCircle size={25} weight="fill" color= {'#FF8080'} /> </div>
+                                <div  className='cursor-pointer' onClick  = {() => deleteProduct(0)}> <XCircle size={25} weight="fill" color= {'#FF8080'} /> </div>
                                 
                                 <section className='rowSection'>
                             <div className='inputContainer'>
@@ -276,19 +279,33 @@ function RegisterModal() {
 
                             </div>
                         
+                            
+
+                                
+                        
+
                             <div className='inputContainer'>
                                 <input type="text" placeholder=' ' className='inputForm' name={`themeName_${product}`} {...register(`themeName_${product}`)}></input>
                                 <label className='inputLabel'> Tema:</label>
 
                             </div>
+                            
                         </section>
 
-                                 <select type="text" placeholder=' ' className='inputForm' name={`productName_${product}`} {...register(`productName_${product}`)}>
-                                    <option value= '' disabled selected >- - Selecione um produto</option>
-                                    {productsList.map(product=>{
-                                        return <option value={product} key={product}>{product}</option>
-                                    })}
-                                </select>
+                                 <div className="rowSection">
+                                     <select type="text" placeholder=' ' className='inputForm' name={`productName_${product}`} {...register(`productName_${product}`)}>
+                                        <option value= '' disabled selected >- - Selecione um produto</option>
+                                        {productsList.map(product=>{
+                                            return <option value={product} key={product}>{product}</option>
+                                        })}
+                                                                     </select>
+                                                                     <div className='inputContainer'>
+                                        <select name={`sexName_${product}`} className='inputForm' {...register(`sexName_${product}`)}>
+                                            <option value='male'>Masculino</option>
+                                            <option value='female' selected>Feminino</option>
+                                        </select>
+                                                                     </div>
+                                 </div>
 
                                 <section className='rowSection'>
                                 <div className='inputContainer'>
