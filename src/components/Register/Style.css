@@ -32,6 +32,7 @@
     background-color:white;
     z-index:1;
     position: sticky;
+    gap:20px;
     top:0;
 }
 

@@ -147,10 +147,10 @@ function RegisterModal() {
 
                         <span>
                             
-                            <div className = 'flex flex-col items-center'>
+                            <div className = 'flex flex-col items-center gap-3'>
                                 <h1>Cadastro
                             </h1>
-                           
+                            <div  className='bg-brandBlue-500 text-white rounded-lg w-[50px]  text-center text-2xl '>{clientCount + 1 }</div>
                             </div>
                         </span>
 
