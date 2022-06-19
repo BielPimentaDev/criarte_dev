@@ -87,15 +87,15 @@ export function monthsTranslate (monthNumber){
 }
 
 
-export const productsList = ['Agenda 1 dpp', 'Agenda 2 dpp','Agendamento profissional',' Album de fotos', 'Bloco A6', 'Planner','Controle financeiro ', 'Caderneta de Gestante ',
-'Caderneta de Vacinação','Caderneta Pet ','Caderno A5','Caderno de pedidos ','Caderno Universitario ','Diario de gestante ',
-'Kit Maternida I ',
-'Kit Maternida II',
-'Kit Maternida III ',
-'Kit Maternida IV',
-'Kit Maternida V',
+export const productsList = ['Agenda 1 DPP', 'Agenda 2 DPP','Agendamento profissional',' Álbum de fotos', 'Bloco A6','Controle financeiro ', 'Caderneta de Gestante ',
+'Caderneta de Vacinação','Caderneta Pet ','Caderno A5','Caderno de pedidos ','Caderno Universitário ','Diário de gestante ',
+'Kit Maternidade I ',
+'Kit Maternidade II',
+'Kit Maternidade III ',
+'Kit Maternidade IV',
+'Kit Maternidade V',
 'Livro do bebê',
-'Mesversario',
+'Mêsversário',
 'Mini agenda ',
-'Porta documentos']
+'Porta documentos', 'Planner']
 
