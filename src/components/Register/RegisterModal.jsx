@@ -27,6 +27,7 @@ function RegisterModal() {
     const url = 'https://thayxis.herokuapp.com/api/v1/products'
 
     const onSubmit = data => {
+             let registerFailed = false
              console.log(data)
 
             const newDate = (monthWeekDay + '-' + dayOfTable[0])
@@ -51,11 +52,12 @@ function RegisterModal() {
             )
                 .then(res => {
                     console.log(res)
-                    const registerFailed = false
+                    
                 }
                     
                     )
                 .catch(err => {
+                    let registerFailed = true
                     console.log(err)
                     if (err.response.data['detail'] == "The day's capacity is full") {
                         alert('Capacidade máxima atingida!')}
@@ -93,7 +95,7 @@ function RegisterModal() {
                             "state": data.stateName
                         }
                 }
-                console.log(dataRegister)
+                
                 
                 
                 axios.post(url,
@@ -105,7 +107,7 @@ function RegisterModal() {
                          if (err.response.data['detail'] == "The day's capacity is full") {
                              alert('Capacidade máxima atingida!')}
                          else {
-                            const registerFailed = true
+                            let registerFailed = true
                          }
          
                          
