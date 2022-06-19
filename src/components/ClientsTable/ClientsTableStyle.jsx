@@ -39,11 +39,15 @@ export const ClientsTable = styled.table`
 
            tbody tr td{
                position:relative;
-                padding: 15px 0;
-                
-                
-               
+                padding: 15px 0;               
            }
+
+           tbody tr td:last-child{
+            overflow-y:auto;
+            padding:5px;
+           }
+
+           
            .trashButton{
                flex:none;
                display:block;
@@ -73,9 +77,11 @@ export const ClientsTable = styled.table`
            }
            tbody tr div p{
                max-width:100px;
-               margin:auto
+               margin:auto;
+               
                
            }
+           
            
 
            @media (max-width:600px){

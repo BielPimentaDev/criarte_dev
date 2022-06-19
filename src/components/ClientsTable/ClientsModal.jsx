@@ -171,7 +171,7 @@ function ClientsModal({ registerModal, closeModal }) {
                                                 </div>
                                                 <div >
                                                     <b>Rua</b>
-                                                    <span ><p>{client.client_address}</p></span>
+                                                    <span ><p className='addressSection'>{client.client_address}</p></span>
                                                 </div>
                                             </td>
 

@@ -49,7 +49,12 @@ function RegisterModal() {
             axios.post(url,
                dataRegister
             )
-                .then(res => console.log(res))
+                .then(res => {
+                    console.log(res)
+                    const registerFailed = false
+                }
+                    
+                    )
                 .catch(err => {
                     console.log(err)
                     if (err.response.data['detail'] == "The day's capacity is full") {
