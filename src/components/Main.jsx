@@ -37,9 +37,7 @@ export function Main(){
         const jsonData =Object.entries(results.data)
         setData(results.data)
         setMonths(jsonData)
-        setIsLoading(false)
-                
-        
+        setIsLoading(false) 
         
 
         

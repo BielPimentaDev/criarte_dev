@@ -49,7 +49,7 @@ function RegisterModal() {
             axios.post(url,
                dataRegister
             )
-                .then(res => alert('Cadastrado com sucesso!'))
+                .then(res => console.log(res))
                 .catch(err => {
                     console.log(err)
                     if (err.response.data['detail'] == "The day's capacity is full") {
@@ -113,7 +113,7 @@ function RegisterModal() {
 
            
     reset()
-    registerFailed && alert('Cadastro nao realizado! Tentar novamente')
+    registerFailed ? alert('Cadastro nao realizado! Tentar novamente') : alert('Cadastro realizado com sucesso!')
     }
 
 
