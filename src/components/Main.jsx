@@ -30,6 +30,7 @@ export function Main() {
     return results;
   };
   async function fetchData() {
+    console.log(url);
     const results = await callApi();
 
     const jsonData = Object.entries(results.data);
