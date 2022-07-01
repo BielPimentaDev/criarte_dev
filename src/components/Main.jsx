@@ -16,7 +16,6 @@ export function Main() {
 
   const { monthsShow, setMonthsShow } = useContext(AppContext);
   const { data, setData } = useContext(AppContext);
-
   const url = ` https://thayxis.herokuapp.com/api/v1/products`;
 
   const callApi = async () => {
@@ -24,6 +23,7 @@ export function Main() {
     return results;
   };
   async function fetchData() {
+    console.log(url);
     const results = await callApi();
 
     const jsonData = Object.entries(results.data);
