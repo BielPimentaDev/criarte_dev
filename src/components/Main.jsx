@@ -1,4 +1,10 @@
-import { Calendar, CaretLeft, CaretRight } from "phosphor-react";
+import {
+  Calendar,
+  CaretLeft,
+  CaretRight,
+  GithubLogo,
+  LinkedinLogo,
+} from "phosphor-react";
 import { CurrentCalendar } from "./CurrentCalendar";
 import { Header } from "./Header";
 import axios from "axios";
@@ -17,7 +23,7 @@ export function Main() {
   const { monthsShow, setMonthsShow } = useContext(AppContext);
   const { data, setData } = useContext(AppContext);
 
-  const url = ` https://thayxis.herokuapp.com/api/v1/products`;
+  const url = ` https://thayxis.herokuapp.com/api/dev/v1/products`;
 
   const callApi = async () => {
     const results = await axios.get(url);
@@ -89,6 +95,26 @@ export function Main() {
             months={Object.entries(months[monthsShow][1])}
             month={months[monthsShow][0]}
           />
+          <div className="bg-stone-800 text-center text-gray-300 w-full h-full p-[50px] mt-[120px]">
+            © Criado por Gabriel Pimenta
+            <div className="flex justify-center gap-3 mt-8">
+              <a
+                className="cursor-pointer"
+                href="https://www.linkedin.com/in/gabriel-alves-pimenta-a2a944163/"
+                target="_blank"
+              >
+                <LinkedinLogo size={32} weight="fill" />
+              </a>
+              <a
+                className="cursor-pointer"
+                href="https://github.com/BielPimentaDev
+              "
+                target="_blank"
+              >
+                <GithubLogo size={32} weight="fill" />
+              </a>
+            </div>
+          </div>
         </>
       )}
     </>
