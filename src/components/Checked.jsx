@@ -8,13 +8,10 @@ export default function Checked({ id, core_status, cover_status }) {
   function checkCore() {
     const core = !checkedCore;
     setCheckedCore(core);
-    axios.put(
-      `https://thayxis.herokuapp.com/api/dev/v1/products/${id}/status`,
-      {
-        cover: checkedCover,
-        core: core,
-      }
-    );
+    axios.put(`https://thayxis.herokuapp.com/api/v1/products/${id}/status`, {
+      cover: checkedCover,
+      core: core,
+    });
   }
 
   function checkCover() {

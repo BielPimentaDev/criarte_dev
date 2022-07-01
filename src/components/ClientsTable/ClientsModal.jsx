@@ -28,11 +28,7 @@ function ClientsModal({ registerModal, closeModal }) {
 
   const dayUrl = newMonthYear + "-" + newDay;
 
-<<<<<<< HEAD
-  const url = `https://thayxis.herokuapp.com/api/dev/v1/days/${dayUrl}`;
-=======
   const url = `https://thayxis.herokuapp.com/api/v1/days/${dayUrl}`;
->>>>>>> ccd768fa489c69ef3af0eb9c63f4a5a3098209ae
 
   function fetchData() {
     console.log(url);
@@ -49,7 +45,7 @@ function ClientsModal({ registerModal, closeModal }) {
 
   function deleteClient(id) {
     axios
-      .delete(` https://thayxis.herokuapp.com/api/dev/v1/products/${id}`)
+      .delete(` https://thayxis.herokuapp.com/api/v1/products/${id}`)
       .then((res) => {
         console.log(res);
         fetchData();

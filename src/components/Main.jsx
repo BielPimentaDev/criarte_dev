@@ -19,16 +19,14 @@ import "./mainStyle.css";
 export function Main() {
   const [months, setMonths] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
   const { monthsShow, setMonthsShow } = useContext(AppContext);
   const { data, setData } = useContext(AppContext);
-
-  const url = ` https://thayxis.herokuapp.com/api/dev/v1/products`;
-
+  const url = ` https://thayxis.herokuapp.com/api/v1/products`;
   const callApi = async () => {
     const results = await axios.get(url);
     return results;
   };
+
   async function fetchData() {
     console.log(url);
     const results = await callApi();
