@@ -21,7 +21,7 @@ export function Main() {
   const [isLoading, setIsLoading] = useState(true);
   const { monthsShow, setMonthsShow } = useContext(AppContext);
   const { data, setData } = useContext(AppContext);
-  const url = ` https://thayxis.herokuapp.com/dev/api/v1/products`;
+  const url = ` https://thayxis.herokuapp.com/api/dev/v1/products`;
   const callApi = async () => {
     const results = await axios.get(url);
     return results;
@@ -94,7 +94,7 @@ export function Main() {
             months={Object.entries(months[monthsShow][1])}
             month={months[monthsShow][0]}
           />
-          <div className="bg-stone-800 text-center text-gray-300 w-full h-full p-[50px] mt-[120px]">
+          <footer className="bg-stone-800 text-center sm:absolute relative bottom-0 text-gray-300 w-full  p-[50px] mt-[120px]">
             © Criado por Gabriel Pimenta
             <div className="flex justify-center gap-3 mt-8">
               <a
@@ -113,7 +113,7 @@ export function Main() {
                 <GithubLogo size={32} weight="fill" />
               </a>
             </div>
-          </div>
+          </footer>
         </>
       )}
     </>

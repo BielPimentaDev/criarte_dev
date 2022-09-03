@@ -45,12 +45,12 @@ function ClientsModal({ registerModal, closeModal }) {
 
   function deleteClient(id) {
     axios
-      .delete(` https://thayxis.herokuapp.com/api/devv1/products/${id}`)
+      .delete(` https://thayxis.herokuapp.com/api/dev/v1/products/${id}`)
       .then((res) => {
         console.log(res);
         fetchData();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log('https://thayxis.herokuapp.com/api/dev/v1/products/${id}'));
   }
 
   return (

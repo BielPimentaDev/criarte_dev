@@ -24,7 +24,7 @@ function RegisterModal() {
     const [clientCount, setClientCount] = useState(clients.length)
     
 
-    const url = 'https://thayxis.herokuapp.com/api/v1/products'
+    const url = 'https://thayxis.herokuapp.com/api/dev/v1/products'
 
     const onSubmit = data => {
              let registerFailed = false

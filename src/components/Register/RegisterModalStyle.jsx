@@ -117,7 +117,7 @@ export const RegisterForm = styled.form`
 
 `
 export const PlusButton = styled.div`
-        transition: all 0.3s
+        transition: all 0.3s;
         width:50px;
         margin: auto;
         cursor: ${props=> props.fullClient ? 'pointer' : '' };
