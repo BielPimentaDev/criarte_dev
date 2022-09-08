@@ -20,18 +20,18 @@ export function CurrentCalendar({ openModal, months, month }) {
   return (
     <Calendar>
       <div className="flex  justify-center mt-10 flex-wrap  justify-items-start gap-5 sm:gap-10">
-        {months.map((week) => {
+        {months.map((week, i) => {
           return (
-            <div className=" flex flex-col gap-4">
+            <div key={i} className=" flex flex-col gap-4">
               <span className="text-center">
                 {translateDictionary[week[0]]}
               </span>
 
               <div className=" flex flex-col gap-5">
-                {week[1].products.map((day) => {
+                {week[1].products.map((day, i) => {
                   if (Object.keys(day) == 0) {
                     return (
-                      <p>
+                      <p key={i}>
                         <br />
                       </p>
                     );
@@ -44,13 +44,15 @@ export function CurrentCalendar({ openModal, months, month }) {
                       }
                     }
                     return (
-                      <CalendarDay
-                        dayOfWeek={week[0]}
-                        dayOfMonth={Object.keys(day)}
-                        month={month}
-                        key={Object.keys(day)[0]}
-                        isFull={full}
-                      />
+                      <div key={i}>
+                        <CalendarDay
+                          dayOfWeek={week[0]}
+                          dayOfMonth={Object.keys(day)}
+                          month={month}
+                          key={Object.keys(day)[0]}
+                          isFull={full}
+                        />
+                      </div>
                     );
                   }
                 })}

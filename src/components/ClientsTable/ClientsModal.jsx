@@ -14,6 +14,7 @@ function ClientsModal({ registerModal, closeModal }) {
   const { monthWeekDay, setMonthWeekDay } = useContext(AppContext);
   const { weekDay, setWeekDay } = useContext(AppContext);
   const { clients, setClients } = useContext(AppContext);
+  const { clientQtf, setClientQtf } = useContext(AppContext);
 
   var newDay = dayOfTable;
   if (dayOfTable < 10) {
@@ -31,7 +32,7 @@ function ClientsModal({ registerModal, closeModal }) {
   const url = `https://thayxis.herokuapp.com/api/dev/v1/days/${dayUrl}`;
 
   function fetchData() {
-    console.log(url);
+    
     axios
       .get(url)
       .then((res) => setClients(res.data))
@@ -50,7 +51,7 @@ function ClientsModal({ registerModal, closeModal }) {
         console.log(res);
         fetchData();
       })
-      .catch((err) => console.log('https://thayxis.herokuapp.com/api/dev/v1/products/${id}'));
+      .catch((err) => console.log('err'));
   }
 
   return (
@@ -86,14 +87,13 @@ function ClientsModal({ registerModal, closeModal }) {
 
               <tbody>
                 {isLoading ? (
-                  <tr>Carregando... </tr>
+                  <tr><td>Carregando... </td></tr>
                 ) : (
-                  clients.map((client) => {
-                    return (
-                      <>
-                        <tr valign="top" className="">
+                  clients.map((client, i) => {
+                    return (                      
+                        <tr key={i} valign="top" className="">
                           <td title={client.observations}>
-                            {client.client_name}
+                            <span>{client.client_name}</span>
                             <br />
                             <div>
                               <b>Nome impresso</b>
@@ -155,7 +155,7 @@ function ClientsModal({ registerModal, closeModal }) {
                             </div>
                           </td>
                         </tr>
-                      </>
+                      
                     );
                   })
                 )}

@@ -15,8 +15,11 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { ThreeDots } from "react-loader-spinner";
 import nameLogo from "../imgs/nameLogo.jpg";
 import "./mainStyle.css";
+import { ExportToExcel } from "./ClientsTable/ExportToExcell";
+import { teste } from "../assets";
 
 export function Main() {
+  const [dataJSON, setDataJSON] = useState({})
   const [months, setMonths] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { monthsShow, setMonthsShow } = useContext(AppContext);
@@ -28,12 +31,12 @@ export function Main() {
   };
 
   async function fetchData() {
-    console.log(url);
+
     const results = await callApi();
-
     const jsonData = Object.entries(results.data);
-    setData(results.data);
 
+    setData(results.data);
+   setDataJSON(jsonData)
     setMonths(jsonData);
 
     setIsLoading(false);
@@ -42,7 +45,6 @@ export function Main() {
   useEffect(() => {
     fetchData();
   }, []);
-
   return (
     <>
       {isLoading ? (
@@ -53,17 +55,19 @@ export function Main() {
             width="100"
             color="#A1D1FF"
             ariaLabel="Carregando..."
-          />
+            />
         </div>
       ) : (
         <>
+
           <Header />
+          <button onClick={() => console.log(Object.entries(data))}>TESTE</button>
 
           <section className="flex justify-center m-10 sm:justify-end  ">
-            <button className="flex items-center gap-2 uppercase bg-brandOrange-500 px-3 py-2 text-white rounded-2xl">
-              <Calendar size={25} weight={"fill"} />
-              Calendário
-            </button>
+            <ExportToExcel apiData={teste}  fileName='teste' className="flex items-center gap-2 uppercase bg-brandOrange-500 px-3 py-2 text-white rounded-2xl">
+             
+              Download
+            </ExportToExcel >
           </section>
 
           <section className="flex justify-center  ">
